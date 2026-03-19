@@ -1,6 +1,6 @@
 const reveals = document.querySelectorAll('.reveal');
-const filterButtons = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
+const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+const projectCards = Array.from(document.querySelectorAll('.project-card'));
 const seeMoreBtn = document.querySelector('.see-more-btn');
 const projectGrid = document.querySelector('.project-grid');
 const projectCount = document.querySelector('.project-count');
@@ -51,18 +51,15 @@ const sortCards = (cards) => {
 };
 
 const applyFilter = (filter) => {
+  if (!projectCards.length) return;
   let visibleCount = 0;
-  const matched = [];
-  projectCards.forEach((card) => {
+  const matched = projectCards.filter((card) => {
     const categories = card.dataset.category ? card.dataset.category.split(' ') : [];
-    const match = filter === 'all' || categories.includes(filter);
-    if (match) matched.push(card);
+    return filter === 'all' || categories.includes(filter);
   });
 
   const sorted = sortCards(matched);
-  if (projectGrid) {
-    sorted.forEach((card) => projectGrid.appendChild(card));
-  }
+  if (projectGrid) sorted.forEach((card) => projectGrid.appendChild(card));
 
   sorted.forEach((card) => {
     if (!showAll && visibleCount >= initialVisible) {
@@ -92,16 +89,20 @@ const applyFilter = (filter) => {
   }
 };
 
-filterButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    filterButtons.forEach((b) => b.classList.remove('active'));
-    filterButtons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
-    btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
-    showAll = false;
-    applyFilter(btn.dataset.filter || 'all');
+if (filterButtons.length) {
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      showAll = false;
+      applyFilter(btn.dataset.filter || 'all');
+    });
   });
-});
+}
 
 if (seeMoreBtn) {
   seeMoreBtn.addEventListener('click', () => {
