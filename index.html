@@ -206,54 +206,27 @@
           </div>
           <div class="project-toolbar reveal">
             <div class="filter-group" role="tablist" aria-label="Project categories">
-              <button class="filter-btn active" data-filter="all" type="button">All</button>
-              <button class="filter-btn" data-filter="cx" type="button">CX</button>
-              <button class="filter-btn" data-filter="ops" type="button">Operations</button>
-              <button class="filter-btn" data-filter="tech" type="button">Tech</button>
-              <button class="filter-btn" data-filter="people" type="button">People</button>
-              <button class="filter-btn" data-filter="culture" type="button">Culture</button>
+              <button class="filter-btn active" data-filter="all" type="button" aria-pressed="true">All</button>
+              <button class="filter-btn" data-filter="cx" type="button" aria-pressed="false">CX</button>
+              <button class="filter-btn" data-filter="ops" type="button" aria-pressed="false">Operations</button>
+              <button class="filter-btn" data-filter="tech" type="button" aria-pressed="false">Tech</button>
+              <button class="filter-btn" data-filter="people" type="button" aria-pressed="false">People</button>
+              <button class="filter-btn" data-filter="culture" type="button" aria-pressed="false">Culture</button>
             </div>
+            <div class="project-count" aria-live="polite">Showing 0 of 0 projects</div>
             <button class="btn btn-outline see-more-btn" type="button">See More</button>
           </div>
 
-          <div class="project-slider reveal" aria-label="Featured projects">
-            <button class="slider-btn prev" type="button" aria-label="Scroll left">‹</button>
-            <div class="slider-track">
-              <article class="slider-card">
-                <img src="assets/projects/kpi-dashboard.png" alt="KPI dashboard" />
-                <div>
-                  <h3>CS & Mapping KPI Dashboard</h3>
-                  <p>Live metrics across response time, verification, and failed trips.</p>
-                </div>
-              </article>
-              <article class="slider-card">
-                <img src="assets/projects/techops-team-presentation.jpg" alt="TechOps team" />
-                <div>
-                  <h3>TechOps Team Setup</h3>
-                  <p>QA, escalation, and reliability workflows built from scratch.</p>
-                </div>
-              </article>
-              <article class="slider-card">
-                <img src="assets/projects/corporate-sales-dashboard.jpg" alt="Corporate sales" />
-                <div>
-                  <h3>Corporate Sales & Premium Care</h3>
-                  <p>BDT 60 lakh monthly orders with premium CX operations.</p>
-                </div>
-              </article>
-            </div>
-            <button class="slider-btn next" type="button" aria-label="Scroll right">›</button>
-          </div>
-
           <div class="project-grid">
-            <article class="project-card reveal" data-category="cx ops">
+            <article class="project-card reveal" data-category="cx ops" data-status="completed">
               <img
                 src="assets/projects/chaldal-food-launch.jpg"
                 alt="Chaldal food pilot launch"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">Project</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">Project • CX / Ops</span>
                 </div>
                 <h3>Chaldal Food — Pilot Launch in Jashore</h3>
                 <p>
@@ -263,15 +236,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="cx ops">
+            <article class="project-card reveal" data-category="cx ops" data-status="completed">
               <img
                 src="assets/projects/corporate-sales-dashboard.jpg"
                 alt="Corporate sales and premium care"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">Project</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">Project • CX / Ops</span>
                 </div>
                 <h3>Corporate Sales & Premium Care Launch</h3>
                 <p>
@@ -281,15 +254,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="tech cx">
+            <article class="project-card reveal" data-category="tech cx" data-status="completed">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="TechOps team setup"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">Project</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">Project • Tech / CX</span>
                 </div>
                 <h3>Tech QA & Engineering Support Teams Setup</h3>
                 <p>
@@ -299,15 +272,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="people ops">
+            <article class="project-card reveal" data-category="people ops" data-status="completed">
               <img
                 src="assets/projects/recruitment-metrics.jpg"
                 alt="Workforce expansion"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">Project</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">Project • People / Ops</span>
                 </div>
                 <h3>Recruitment & Workforce Expansion</h3>
                 <p>
@@ -326,15 +299,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="cx ops">
+            <article class="project-card reveal" data-category="cx ops" data-status="completed">
               <img
                 src="assets/projects/kpi-dashboard.png"
                 alt="CS and Mapping KPI dashboard"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">15 Hours</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">15 Hours • CX / Ops</span>
                 </div>
                 <h3>CS & Mapping Dynamic KPI Dashboard</h3>
                 <p>
@@ -354,12 +327,12 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="ops">
+            <article class="project-card reveal" data-category="ops" data-status="completed">
               <img src="assets/projects/chaldal-food-launch.jpg" alt="Mapping polygons" />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">10 Hours</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">10 Hours • Ops</span>
                 </div>
                 <h3>Reducing Customer Interactions via Access-Point Polygons</h3>
                 <p>
@@ -378,15 +351,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="tech cx">
+            <article class="project-card reveal" data-category="tech cx" data-status="progress">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="AI automation and QA for Crisp"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge progress">In Progress</span>
-                  <span class="hours">10 Hours</span>
+                  <span class="status progress">In Progress</span>
+                  <span class="meta">10 Hours • Tech / CX</span>
                 </div>
                 <h3>AI-Driven Automation & QA for Crisp</h3>
                 <p>
@@ -397,12 +370,12 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="people">
+            <article class="project-card reveal" data-category="people" data-status="failed">
               <img src="assets/projects/recruitment-metrics.jpg" alt="English and typing" />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge failed">Failed</span>
-                  <span class="hours">15 Hours</span>
+                  <span class="status failed">Failed</span>
+                  <span class="meta">15 Hours • People</span>
                 </div>
                 <h3>CS & Mapping English & Typing Skill Boost</h3>
                 <p>
@@ -425,12 +398,12 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="tech cx">
+            <article class="project-card reveal" data-category="tech cx" data-status="failed">
               <img src="assets/projects/kpi-dashboard.png" alt="Magic reply response time" />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge failed">Failed</span>
-                  <span class="hours">10 Hours</span>
+                  <span class="status failed">Failed</span>
+                  <span class="meta">10 Hours • Tech / CX</span>
                 </div>
                 <h3>Magic Reply / Autobot Response Time Reduction</h3>
                 <p>
@@ -454,15 +427,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="ops">
+            <article class="project-card reveal" data-category="ops" data-status="completed">
               <img
                 src="assets/projects/chaldal-food-launch.jpg"
                 alt="Physical address verification"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">Completed</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">Completed • Ops</span>
                 </div>
                 <h3>Physical Address Verification for Mapping Accuracy</h3>
                 <p>
@@ -481,15 +454,15 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="tech ops">
+            <article class="project-card reveal" data-category="tech ops" data-status="completed">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="TechOps team introduction"
               />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge completed">Completed</span>
-                  <span class="hours">2019</span>
+                  <span class="status completed">Completed</span>
+                  <span class="meta">2019 • Tech / Ops</span>
                 </div>
                 <h3>Built TechOps Team — Introduction</h3>
                 <p>
@@ -508,12 +481,12 @@
               </div>
             </article>
 
-            <article class="project-card reveal" data-category="culture">
+            <article class="project-card reveal" data-category="culture" data-status="community">
               <img src="assets/May Day.jpg" alt="Father's Love May Day 2024" />
               <div class="project-body">
                 <div class="project-meta">
-                  <span class="badge community">Culture</span>
-                  <span class="hours">May Day 2024</span>
+                  <span class="status community">Culture</span>
+                  <span class="meta">May Day 2024 • Culture</span>
                 </div>
                 <h3>Father’s Love — May Day Story</h3>
                 <p>
@@ -523,6 +496,10 @@
                 </p>
               </div>
             </article>
+          </div>
+          <div class="project-empty" role="status" aria-live="polite">
+            No projects found in this category.
+            <button class="link-button clear-filters" type="button">Clear filters</button>
           </div>
         </div>
       </section>

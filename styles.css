@@ -342,6 +342,12 @@ section {
   flex-wrap: wrap;
 }
 
+.project-count {
+  color: var(--slate);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 .filter-group {
   display: flex;
   flex-wrap: wrap;
@@ -433,6 +439,30 @@ section {
   display: none;
 }
 
+.project-empty {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  color: var(--slate);
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-empty.show {
+  display: flex;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--navy);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
 .project-card {
   background: var(--surface-strong);
   border-radius: 24px;
@@ -471,39 +501,39 @@ section {
   gap: 10px;
 }
 
-.hours {
-  font-size: 0.85rem;
-  color: var(--slate);
-  font-weight: 600;
-}
-
-.badge {
-  padding: 6px 12px;
+.status {
+  padding: 6px 10px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-.badge.completed {
-  background: rgba(22, 163, 74, 0.12);
-  color: #15803d;
+.status.completed {
+  background: #e8f0ed;
+  color: #0f5132;
 }
 
-.badge.progress {
-  background: rgba(59, 130, 246, 0.12);
-  color: #1d4ed8;
+.status.progress {
+  background: #eef2ff;
+  color: #1e3a8a;
 }
 
-.badge.failed {
-  background: rgba(239, 68, 68, 0.12);
-  color: #b91c1c;
+.status.failed {
+  background: #f5e8e8;
+  color: #7f1d1d;
 }
 
-.badge.community {
-  background: rgba(234, 179, 8, 0.14);
-  color: #b45309;
+.status.community {
+  background: #f5efe2;
+  color: #92400e;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: var(--slate);
+  font-weight: 600;
 }
 
 .project-actions {
