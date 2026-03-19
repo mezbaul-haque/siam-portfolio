@@ -204,8 +204,48 @@
               performance.
             </p>
           </div>
+          <div class="project-toolbar reveal">
+            <div class="filter-group" role="tablist" aria-label="Project categories">
+              <button class="filter-btn active" data-filter="all" type="button">All</button>
+              <button class="filter-btn" data-filter="cx" type="button">CX</button>
+              <button class="filter-btn" data-filter="ops" type="button">Operations</button>
+              <button class="filter-btn" data-filter="tech" type="button">Tech</button>
+              <button class="filter-btn" data-filter="people" type="button">People</button>
+              <button class="filter-btn" data-filter="culture" type="button">Culture</button>
+            </div>
+            <button class="btn btn-outline see-more-btn" type="button">See More</button>
+          </div>
+
+          <div class="project-slider reveal" aria-label="Featured projects">
+            <button class="slider-btn prev" type="button" aria-label="Scroll left">‹</button>
+            <div class="slider-track">
+              <article class="slider-card">
+                <img src="assets/projects/kpi-dashboard.png" alt="KPI dashboard" />
+                <div>
+                  <h3>CS & Mapping KPI Dashboard</h3>
+                  <p>Live metrics across response time, verification, and failed trips.</p>
+                </div>
+              </article>
+              <article class="slider-card">
+                <img src="assets/projects/techops-team-presentation.jpg" alt="TechOps team" />
+                <div>
+                  <h3>TechOps Team Setup</h3>
+                  <p>QA, escalation, and reliability workflows built from scratch.</p>
+                </div>
+              </article>
+              <article class="slider-card">
+                <img src="assets/projects/corporate-sales-dashboard.jpg" alt="Corporate sales" />
+                <div>
+                  <h3>Corporate Sales & Premium Care</h3>
+                  <p>BDT 60 lakh monthly orders with premium CX operations.</p>
+                </div>
+              </article>
+            </div>
+            <button class="slider-btn next" type="button" aria-label="Scroll right">›</button>
+          </div>
+
           <div class="project-grid">
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="cx ops">
               <img
                 src="assets/projects/chaldal-food-launch.jpg"
                 alt="Chaldal food pilot launch"
@@ -223,7 +263,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="cx ops">
               <img
                 src="assets/projects/corporate-sales-dashboard.jpg"
                 alt="Corporate sales and premium care"
@@ -241,7 +281,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="tech cx">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="TechOps team setup"
@@ -259,7 +299,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="people ops">
               <img
                 src="assets/projects/recruitment-metrics.jpg"
                 alt="Workforce expansion"
@@ -286,7 +326,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="cx ops">
               <img
                 src="assets/projects/kpi-dashboard.png"
                 alt="CS and Mapping KPI dashboard"
@@ -314,7 +354,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="ops">
               <img src="assets/projects/chaldal-food-launch.jpg" alt="Mapping polygons" />
               <div class="project-body">
                 <div class="project-meta">
@@ -338,7 +378,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="tech cx">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="AI automation and QA for Crisp"
@@ -357,7 +397,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="people">
               <img src="assets/projects/recruitment-metrics.jpg" alt="English and typing" />
               <div class="project-body">
                 <div class="project-meta">
@@ -385,7 +425,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="tech cx">
               <img src="assets/projects/kpi-dashboard.png" alt="Magic reply response time" />
               <div class="project-body">
                 <div class="project-meta">
@@ -414,7 +454,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="ops">
               <img
                 src="assets/projects/chaldal-food-launch.jpg"
                 alt="Physical address verification"
@@ -441,7 +481,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="tech ops">
               <img
                 src="assets/projects/techops-team-presentation.jpg"
                 alt="TechOps team introduction"
@@ -468,7 +508,7 @@
               </div>
             </article>
 
-            <article class="project-card reveal">
+            <article class="project-card reveal" data-category="culture">
               <img src="assets/May Day.jpg" alt="Father's Love May Day 2024" />
               <div class="project-body">
                 <div class="project-meta">
