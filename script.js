@@ -1,4 +1,5 @@
-const reveals = document.querySelectorAll('.reveal');
+const body = document.body;
+const reveals = Array.from(document.querySelectorAll('.reveal'));
 const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
 const projectCards = Array.from(document.querySelectorAll('.project-card'));
 const seeMoreBtn = document.querySelector('.see-more-btn');
@@ -6,22 +7,40 @@ const projectGrid = document.querySelector('.project-grid');
 const projectCount = document.querySelector('.project-count');
 const projectEmpty = document.querySelector('.project-empty');
 const clearFiltersBtn = document.querySelector('.clear-filters');
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileLinks = Array.from(document.querySelectorAll('.mobile-nav a'));
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.2,
-  }
-);
+const setMenuState = (isOpen) => {
+  if (!menuToggle || !mobileMenu) return;
 
-reveals.forEach((el) => observer.observe(el));
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  mobileMenu.hidden = !isOpen;
+  mobileMenu.dataset.open = String(isOpen);
+  body.classList.toggle('menu-open', isOpen);
+};
+
+if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.18,
+    }
+  );
+
+  reveals.forEach((el) => observer.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add('active'));
+}
 
 let showAll = false;
 const initialVisible = 6;
@@ -39,19 +58,21 @@ const getStatus = (card) => {
   return statusEl.classList[1] || 'other';
 };
 
-const sortCards = (cards) => {
-  return cards.sort((a, b) => {
+const sortCards = (cards) =>
+  [...cards].sort((a, b) => {
     const aStatus = statusOrder[getStatus(a)] || 9;
     const bStatus = statusOrder[getStatus(b)] || 9;
+
     if (aStatus !== bStatus) return aStatus - bStatus;
+
     const aTitle = a.querySelector('h3')?.textContent || '';
     const bTitle = b.querySelector('h3')?.textContent || '';
     return aTitle.localeCompare(bTitle);
   });
-};
 
 const applyFilter = (filter) => {
   if (!projectCards.length) return;
+
   let visibleCount = 0;
   const matched = projectCards.filter((card) => {
     const categories = card.dataset.category ? card.dataset.category.split(' ') : [];
@@ -59,7 +80,15 @@ const applyFilter = (filter) => {
   });
 
   const sorted = sortCards(matched);
-  if (projectGrid) sorted.forEach((card) => projectGrid.appendChild(card));
+  const hiddenCards = projectCards.filter((card) => !matched.includes(card));
+
+  if (projectGrid) {
+    sorted.forEach((card) => projectGrid.appendChild(card));
+    hiddenCards.forEach((card) => {
+      card.classList.add('hidden');
+      projectGrid.appendChild(card);
+    });
+  }
 
   sorted.forEach((card) => {
     if (!showAll && visibleCount >= initialVisible) {
@@ -74,14 +103,16 @@ const applyFilter = (filter) => {
   if (projectCount) {
     projectCount.textContent = `Showing ${Math.min(visibleCount, total)} of ${total} projects`;
   }
+
   if (projectEmpty) {
     projectEmpty.classList.toggle('show', total === 0);
   }
+
   if (seeMoreBtn) {
     if (total <= initialVisible) {
-      seeMoreBtn.style.display = 'none';
+      seeMoreBtn.hidden = true;
     } else {
-      seeMoreBtn.style.display = 'inline-flex';
+      seeMoreBtn.hidden = false;
       seeMoreBtn.textContent = showAll
         ? `See Less (${total} of ${total})`
         : `See More (${Math.min(initialVisible, total)} of ${total})`;
@@ -92,10 +123,11 @@ const applyFilter = (filter) => {
 if (filterButtons.length) {
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      filterButtons.forEach((b) => {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
+      filterButtons.forEach((button) => {
+        button.classList.remove('active');
+        button.setAttribute('aria-pressed', 'false');
       });
+
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
       showAll = false;
@@ -114,9 +146,33 @@ if (seeMoreBtn) {
 
 if (clearFiltersBtn) {
   clearFiltersBtn.addEventListener('click', () => {
-    const allBtn = document.querySelector('.filter-btn[data-filter=\"all\"]');
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
     if (allBtn) allBtn.click();
   });
 }
 
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    setMenuState(!isOpen);
+  });
+}
+
+mobileLinks.forEach((link) => {
+  link.addEventListener('click', () => setMenuState(false));
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960) {
+    setMenuState(false);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    setMenuState(false);
+  }
+});
+
+setMenuState(false);
 applyFilter('all');
