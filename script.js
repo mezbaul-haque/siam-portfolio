@@ -10,7 +10,27 @@ const clearFiltersBtn = document.querySelector('.clear-filters');
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 const mobileLinks = Array.from(document.querySelectorAll('.mobile-nav a'));
+const sectionLinks = Array.from(
+  document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-nav a[href^="#"]')
+);
+const observedSections = sectionLinks
+  .map((link) => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+const setActiveNavLink = (id) => {
+  sectionLinks.forEach((link) => {
+    const isActive = link.getAttribute('href') === `#${id}`;
+    link.classList.toggle('active', isActive);
+    if (!link.classList.contains('btn')) {
+      if (isActive) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    }
+  });
+};
 
 const setMenuState = (isOpen) => {
   if (!menuToggle || !mobileMenu) return;
@@ -40,6 +60,28 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   reveals.forEach((el) => observer.observe(el));
 } else {
   reveals.forEach((el) => el.classList.add('active'));
+}
+
+if (observedSections.length && 'IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      const visibleEntries = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visibleEntries.length) {
+        setActiveNavLink(visibleEntries[0].target.id);
+      }
+    },
+    {
+      rootMargin: '-25% 0px -55% 0px',
+      threshold: [0.2, 0.4, 0.6],
+    }
+  );
+
+  observedSections.forEach((section) => navObserver.observe(section));
+} else if (observedSections.length) {
+  setActiveNavLink(observedSections[0].id);
 }
 
 let showAll = false;
