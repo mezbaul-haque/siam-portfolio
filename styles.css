@@ -845,20 +845,58 @@ section {
   background: rgba(248, 250, 252, 0.62);
 }
 
+.education-block + .education-block {
+  margin-top: 36px;
+}
+
+.education-block-divider {
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.subsection-title {
+  margin: 0 0 18px;
+  font-family: "Sora", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
 .edu-grid,
 .cert-grid {
   display: grid;
   gap: 24px;
 }
 
-.edu-card,
-.cert-card {
+.edu-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cert-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.edu-card {
   display: grid;
   grid-template-columns: 88px 1fr;
   gap: 18px;
   align-items: flex-start;
   padding: 22px;
   border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 243, 0.92)),
+    var(--surface-strong);
+  border: 1px solid rgba(22, 163, 74, 0.12);
+}
+
+.cert-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.22);
 }
 
 .edu-card img,
@@ -875,16 +913,69 @@ section {
   height: 72px;
 }
 
-.cert-card > div {
+.edu-copy,
+.cert-copy {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.cert-heading {
-  margin: 28px 0 16px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+.edu-card h3,
+.cert-card h3 {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.edu-school {
+  margin: 0;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.edu-meta,
+.cert-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.edu-meta span,
+.cert-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--accent-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.cert-meta span {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--navy);
+}
+
+.edu-summary {
+  margin-top: 4px;
+}
+
+.cert-copy p {
+  margin: 2px 0 0;
+}
+
+.cert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.cert-actions .btn-small {
+  min-height: 40px;
 }
 
 .achievement-grid {
@@ -1087,9 +1178,19 @@ section {
     height: 220px;
   }
 
+  .edu-grid,
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
   .edu-card,
   .cert-card {
     grid-template-columns: 1fr;
+  }
+
+  .edu-card img,
+  .cert-card img {
+    width: 88px;
   }
 }
 
