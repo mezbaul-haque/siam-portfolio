@@ -116,6 +116,7 @@ button:focus-visible {
   backdrop-filter: blur(16px);
   background: rgba(252, 251, 249, 0.82);
   border-bottom: 1px solid rgba(168, 157, 149, 0.14);
+  box-shadow: 0 8px 24px rgba(51, 43, 39, 0.05);
 }
 
 .nav-wrap {
@@ -414,6 +415,11 @@ section {
   backdrop-filter: blur(10px);
 }
 
+.featured-card,
+.project-card {
+  cursor: pointer;
+}
+
 .section-title p,
 .about-copy p,
 .timeline-item ul,
@@ -659,6 +665,18 @@ section {
   transform: translateY(-4px);
   box-shadow: 0 22px 44px rgba(51, 43, 39, 0.1);
   border-color: rgba(136, 118, 106, 0.12);
+}
+
+.featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(51, 43, 39, 0.1);
+  border-color: rgba(136, 118, 106, 0.16);
+}
+
+.featured-card:focus-visible,
+.project-card:focus-visible {
+  outline: 3px solid rgba(136, 118, 106, 0.24);
+  outline-offset: 4px;
 }
 
 .project-card img {
@@ -1004,6 +1022,145 @@ section {
   min-width: 240px;
 }
 
+.detail-modal[hidden] {
+  display: none;
+}
+
+.detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.detail-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(33, 27, 24, 0.46);
+  backdrop-filter: blur(8px);
+}
+
+.detail-modal-dialog {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: min(88vh, 920px);
+  overflow: auto;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 241, 236, 0.96)),
+    var(--surface-strong);
+  border: 1px solid rgba(140, 102, 75, 0.14);
+  box-shadow: 0 30px 90px rgba(33, 27, 24, 0.22);
+}
+
+.detail-modal-close {
+  position: sticky;
+  top: 18px;
+  margin: 18px 18px 0 auto;
+  display: inline-flex;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--navy);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.detail-modal-media-wrap {
+  padding: 0 24px;
+}
+
+.detail-modal-media {
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.detail-modal-copy {
+  padding: 24px 24px 28px;
+}
+
+.detail-modal-kicker {
+  margin: 0 0 8px;
+  color: var(--accent-deep);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.detail-modal-copy h3 {
+  margin: 0 0 14px;
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  line-height: 1.15;
+}
+
+.detail-modal-meta,
+.detail-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-modal-meta {
+  margin-bottom: 18px;
+}
+
+.detail-modal-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.detail-modal-body {
+  display: grid;
+  gap: 14px;
+}
+
+.detail-modal-body p,
+.detail-modal-body li {
+  color: var(--slate);
+  line-height: 1.75;
+}
+
+.detail-modal-body ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.detail-modal-section {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+}
+
+.detail-modal-section h4 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 1rem;
+}
+
+.detail-modal-body > p {
+  margin: 0;
+}
+
+.detail-modal-actions {
+  margin-top: 22px;
+}
+
 .site-footer {
   padding: 32px 0 48px;
   color: var(--slate);
@@ -1090,6 +1247,16 @@ section {
     grid-template-columns: 1fr;
   }
 
+  .detail-modal {
+    padding: 16px;
+  }
+
+  .detail-modal-copy,
+  .detail-modal-media-wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
   .timeline-role {
     flex-direction: column;
   }
@@ -1141,6 +1308,10 @@ section {
   .edu-grid,
   .cert-grid {
     grid-template-columns: 1fr;
+  }
+
+  .detail-modal-dialog {
+    max-height: 92vh;
   }
 
   .edu-card,

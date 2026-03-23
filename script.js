@@ -2,6 +2,7 @@ const body = document.body;
 const reveals = Array.from(document.querySelectorAll('.reveal'));
 const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
 const projectCards = Array.from(document.querySelectorAll('.project-card'));
+const detailCards = Array.from(document.querySelectorAll('.featured-card, .project-card'));
 const seeMoreBtn = document.querySelector('.see-more-btn');
 const projectGrid = document.querySelector('.project-grid');
 const projectCount = document.querySelector('.project-count');
@@ -10,6 +11,15 @@ const clearFiltersBtn = document.querySelector('.clear-filters');
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 const mobileLinks = Array.from(document.querySelectorAll('.mobile-nav a'));
+const detailModal = document.querySelector('#detail-modal');
+const detailModalBackdrop = detailModal?.querySelector('.detail-modal-backdrop');
+const detailModalClose = detailModal?.querySelector('.detail-modal-close');
+const detailModalMedia = detailModal?.querySelector('.detail-modal-media');
+const detailModalKicker = detailModal?.querySelector('#detail-modal-kicker');
+const detailModalTitle = detailModal?.querySelector('#detail-modal-title');
+const detailModalMeta = detailModal?.querySelector('#detail-modal-meta');
+const detailModalBody = detailModal?.querySelector('#detail-modal-body');
+const detailModalActions = detailModal?.querySelector('#detail-modal-actions');
 const sectionLinks = Array.from(
   document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-nav a[href^="#"]')
 );
@@ -17,6 +27,7 @@ const observedSections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let lastFocusedCard = null;
 
 const setActiveNavLink = (id) => {
   sectionLinks.forEach((link) => {
@@ -39,7 +50,151 @@ const setMenuState = (isOpen) => {
   menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   mobileMenu.hidden = !isOpen;
   mobileMenu.dataset.open = String(isOpen);
-  body.classList.toggle('menu-open', isOpen);
+  body.classList.toggle('menu-open', isOpen || !detailModal?.hidden);
+};
+
+const createMetaTag = (text) => {
+  const tag = document.createElement('span');
+  tag.textContent = text;
+  return tag;
+};
+
+const openDetailModal = (card) => {
+  if (
+    !detailModal ||
+    !detailModalTitle ||
+    !detailModalBody ||
+    !detailModalMeta ||
+    !detailModalActions ||
+    !detailModalKicker ||
+    !detailModalMedia
+  ) {
+    return;
+  }
+
+  lastFocusedCard = card;
+  detailModalBody.innerHTML = '';
+  detailModalMeta.innerHTML = '';
+  detailModalActions.innerHTML = '';
+  detailModalKicker.textContent = '';
+
+  const title = card.querySelector('h3')?.textContent?.trim() || 'Details';
+  detailModalTitle.textContent = title;
+
+  const image = card.querySelector('img');
+  if (image?.getAttribute('src')) {
+    detailModalMedia.hidden = false;
+    detailModalMedia.src = image.getAttribute('src');
+    detailModalMedia.alt = image.getAttribute('alt') || title;
+  } else {
+    detailModalMedia.hidden = true;
+    detailModalMedia.removeAttribute('src');
+    detailModalMedia.alt = '';
+  }
+
+  if (card.classList.contains('featured-card')) {
+    detailModalKicker.textContent = card.querySelector('.eyebrow')?.textContent?.trim() || 'Featured Work';
+
+    const summary = card.querySelector('.featured-summary')?.textContent?.trim();
+    if (summary) {
+      const summaryEl = document.createElement('p');
+      summaryEl.textContent = summary;
+      detailModalBody.appendChild(summaryEl);
+    }
+
+    card.querySelectorAll('.featured-impact span').forEach((item) => {
+      detailModalMeta.appendChild(createMetaTag(item.textContent.trim()));
+    });
+
+    card.querySelectorAll('.featured-story > div').forEach((section) => {
+      const block = document.createElement('div');
+      block.className = 'detail-modal-section';
+
+      const heading = document.createElement('h4');
+      heading.textContent = section.querySelector('.story-label')?.textContent?.trim() || 'Detail';
+
+      const copy = document.createElement('p');
+      copy.textContent = section.querySelector('p')?.textContent?.trim() || '';
+
+      block.appendChild(heading);
+      block.appendChild(copy);
+      detailModalBody.appendChild(block);
+    });
+  } else {
+    detailModalKicker.textContent = 'Project Detail';
+
+    const metaTexts = Array.from(card.querySelectorAll('.project-meta span')).map((item) =>
+      item.textContent.trim()
+    );
+    metaTexts.forEach((text) => {
+      detailModalMeta.appendChild(createMetaTag(text));
+    });
+
+    const description = card.querySelector('.project-body > p:not(.project-impact):not(.learning)');
+    if (description?.textContent?.trim()) {
+      const descriptionEl = document.createElement('p');
+      descriptionEl.textContent = description.textContent.trim();
+      detailModalBody.appendChild(descriptionEl);
+    }
+
+    const impactText = card.querySelector('.project-impact')?.textContent?.trim();
+    if (impactText) {
+      const impactBlock = document.createElement('div');
+      impactBlock.className = 'detail-modal-section';
+      const heading = document.createElement('h4');
+      heading.textContent = 'Impact';
+      const copy = document.createElement('p');
+      copy.textContent = impactText;
+      impactBlock.appendChild(heading);
+      impactBlock.appendChild(copy);
+      detailModalBody.appendChild(impactBlock);
+    }
+
+    const learningText = card.querySelector('.learning')?.textContent?.trim();
+    if (learningText) {
+      const learningBlock = document.createElement('div');
+      learningBlock.className = 'detail-modal-section';
+      const heading = document.createElement('h4');
+      heading.textContent = 'Learning';
+      const copy = document.createElement('p');
+      copy.textContent = learningText;
+      learningBlock.appendChild(heading);
+      learningBlock.appendChild(copy);
+      detailModalBody.appendChild(learningBlock);
+    }
+
+    const extraDetail = card.querySelector('.detail-content');
+    if (extraDetail) {
+      Array.from(extraDetail.children).forEach((child) => {
+        detailModalBody.appendChild(child.cloneNode(true));
+      });
+    }
+
+    card.querySelectorAll('.project-actions a').forEach((link) => {
+      const action = document.createElement('a');
+      action.className = 'btn btn-small';
+      action.href = link.href;
+      action.target = link.target || '_self';
+      if (link.rel) action.rel = link.rel;
+      if (link.hasAttribute('download')) action.setAttribute('download', '');
+      action.textContent = link.textContent.trim();
+      detailModalActions.appendChild(action);
+    });
+  }
+
+  detailModal.hidden = false;
+  body.classList.add('menu-open');
+  detailModalClose?.focus();
+};
+
+const closeDetailModal = () => {
+  if (!detailModal || detailModal.hidden) return;
+
+  detailModal.hidden = true;
+  body.classList.toggle('menu-open', menuToggle?.getAttribute('aria-expanded') === 'true');
+  if (lastFocusedCard) {
+    lastFocusedCard.focus();
+  }
 };
 
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
@@ -62,26 +217,39 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   reveals.forEach((el) => el.classList.add('active'));
 }
 
-if (observedSections.length && 'IntersectionObserver' in window) {
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      const visibleEntries = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+const updateActiveNavLink = () => {
+  if (!observedSections.length) return;
 
-      if (visibleEntries.length) {
-        setActiveNavLink(visibleEntries[0].target.id);
-      }
-    },
-    {
-      rootMargin: '-25% 0px -55% 0px',
-      threshold: [0.2, 0.4, 0.6],
+  const headerOffset = document.querySelector('.site-header')?.offsetHeight || 0;
+  const scrollPosition = window.scrollY + headerOffset + 24;
+
+  let currentSection = observedSections[0];
+
+  observedSections.forEach((section) => {
+    if (section.offsetTop <= scrollPosition) {
+      currentSection = section;
     }
-  );
+  });
 
-  observedSections.forEach((section) => navObserver.observe(section));
-} else if (observedSections.length) {
-  setActiveNavLink(observedSections[0].id);
+  setActiveNavLink(currentSection.id);
+};
+
+if (observedSections.length) {
+  let ticking = false;
+
+  const handleNavState = () => {
+    if (ticking) return;
+
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateActiveNavLink();
+      ticking = false;
+    });
+  };
+
+  window.addEventListener('scroll', handleNavState, { passive: true });
+  window.addEventListener('resize', handleNavState);
+  updateActiveNavLink();
 }
 
 let showAll = false;
@@ -193,6 +361,29 @@ if (clearFiltersBtn) {
   });
 }
 
+if (detailCards.length) {
+  detailCards.forEach((card) => {
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-haspopup', 'dialog');
+
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('a, button')) return;
+      openDetailModal(card);
+    });
+
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openDetailModal(card);
+      }
+    });
+  });
+}
+
+detailModalBackdrop?.addEventListener('click', closeDetailModal);
+detailModalClose?.addEventListener('click', closeDetailModal);
+
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
     const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -213,6 +404,7 @@ window.addEventListener('resize', () => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     setMenuState(false);
+    closeDetailModal();
   }
 });
 
