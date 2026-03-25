@@ -12,6 +12,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 const mobileLinks = Array.from(document.querySelectorAll('.mobile-nav a'));
 const detailModal = document.querySelector('#detail-modal');
+const detailModalDialog = detailModal?.querySelector('.detail-modal-dialog');
 const detailModalBackdrop = detailModal?.querySelector('.detail-modal-backdrop');
 const detailModalClose = detailModal?.querySelector('.detail-modal-close');
 const detailModalMedia = detailModal?.querySelector('.detail-modal-media');
@@ -27,7 +28,39 @@ const observedSections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const focusableSelector =
+  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 let lastFocusedCard = null;
+
+const getModalFocusableElements = () => {
+  if (!detailModalDialog) return [];
+
+  return Array.from(detailModalDialog.querySelectorAll(focusableSelector)).filter(
+    (element) => !element.hasAttribute('hidden')
+  );
+};
+
+const maintainModalFocus = (event) => {
+  if (!detailModal || detailModal.hidden || event.key !== 'Tab') return;
+
+  const focusableElements = getModalFocusableElements();
+  if (!focusableElements.length) {
+    event.preventDefault();
+    detailModalDialog?.focus();
+    return;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+};
 
 const setActiveNavLink = (id) => {
   sectionLinks.forEach((link) => {
@@ -184,7 +217,12 @@ const openDetailModal = (card) => {
 
   detailModal.hidden = false;
   body.classList.add('menu-open');
-  detailModalClose?.focus();
+
+  window.requestAnimationFrame(() => {
+    const focusableElements = getModalFocusableElements();
+    const nextFocusTarget = focusableElements[0] || detailModalDialog;
+    nextFocusTarget?.focus();
+  });
 };
 
 const closeDetailModal = () => {
@@ -402,11 +440,25 @@ window.addEventListener('resize', () => {
 });
 
 document.addEventListener('keydown', (event) => {
+  maintainModalFocus(event);
+
   if (event.key === 'Escape') {
     setMenuState(false);
     closeDetailModal();
   }
 });
 
+Array.from(document.querySelectorAll('img')).forEach((image, index) => {
+  image.decoding = 'async';
+
+  if (index === 0) {
+    image.fetchPriority = 'high';
+    return;
+  }
+
+  image.loading = 'lazy';
+});
+
+detailModalDialog?.setAttribute('tabindex', '-1');
 setMenuState(false);
 applyFilter('all');
