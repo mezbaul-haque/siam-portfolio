@@ -7,7 +7,8 @@ Personal portfolio site for Siam Ur Rahman, focused on customer experience leade
 - `index.html`: Main content, portfolio sections, metadata, and modal markup
 - `styles.css`: Full visual design, layout, responsive behavior, and animations
 - `script.js`: Navigation state, reveal effects, project filtering, and modal interactions
-- `assets/`: Published images, logos, PDFs, and project media used by the site
+- `assets/`: Published images, logos, PDFs, and project media used by the live site
+- `assets-source/`: Original JPG source photos kept for editing and future exports
 - `assets-updated/`: Source material and newer media kept for future content updates
 
 ## Local Preview
@@ -23,7 +24,7 @@ Then open `http://localhost:8000`.
 ## Content Update Workflow
 
 1. Replace text directly in `index.html`.
-2. Add or swap media inside `assets/`.
+2. Add or swap source photos inside `assets-source/`, then export optimized live assets into `assets/`.
 3. Keep large raw or candidate files inside `assets-updated/` until they are optimized for the live site.
 4. Review responsive layout and modal behavior after any new cards or sections are added.
 
@@ -41,6 +42,7 @@ This project does not require a build step. It can be deployed directly to any s
 
 ## Maintenance Notes
 
-- Prefer compressed images before moving them into `assets/`
+- Prefer WebP for live photographic assets in `assets/`
+- Keep JPG originals in `assets-source/` unless a JPG is still intentionally used for social preview metadata
 - Keep role dates and headline metrics current in `index.html`
 - Use absolute URLs for future canonical or social preview tags once the final production domain is confirmed

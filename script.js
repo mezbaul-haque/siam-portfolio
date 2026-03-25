@@ -21,6 +21,21 @@ const detailModalTitle = detailModal?.querySelector('#detail-modal-title');
 const detailModalMeta = detailModal?.querySelector('#detail-modal-meta');
 const detailModalBody = detailModal?.querySelector('#detail-modal-body');
 const detailModalActions = detailModal?.querySelector('#detail-modal-actions');
+const experienceChapters = Array.from(document.querySelectorAll('.experience-chapter'));
+const experienceStageKicker = document.querySelector('#experience-stage-kicker');
+const experienceStagePeriod = document.querySelector('#experience-stage-period');
+const experienceStageRole = document.querySelector('#experience-stage-role');
+const experienceStageCompany = document.querySelector('#experience-stage-company');
+const experienceStageSummary = document.querySelector('#experience-stage-summary');
+const experienceStageShift = document.querySelector('#experience-stage-shift');
+const experienceStageMetrics = document.querySelector('#experience-stage-metrics');
+const experienceStageFocus = document.querySelector('#experience-stage-focus');
+const experienceArcTitle1 = document.querySelector('#experience-arc-title-1');
+const experienceArcTitle2 = document.querySelector('#experience-arc-title-2');
+const experienceArcTitle3 = document.querySelector('#experience-arc-title-3');
+const experienceArcCopy1 = document.querySelector('#experience-arc-copy-1');
+const experienceArcCopy2 = document.querySelector('#experience-arc-copy-2');
+const experienceArcCopy3 = document.querySelector('#experience-arc-copy-3');
 const sectionLinks = Array.from(
   document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-nav a[href^="#"]')
 );
@@ -90,6 +105,73 @@ const createMetaTag = (text) => {
   const tag = document.createElement('span');
   tag.textContent = text;
   return tag;
+};
+
+const updateExperienceStage = (button) => {
+  if (
+    !button ||
+    !experienceStageKicker ||
+    !experienceStagePeriod ||
+    !experienceStageRole ||
+    !experienceStageCompany ||
+    !experienceStageSummary ||
+    !experienceStageShift ||
+    !experienceStageMetrics ||
+    !experienceStageFocus ||
+    !experienceArcTitle1 ||
+    !experienceArcTitle2 ||
+    !experienceArcTitle3 ||
+    !experienceArcCopy1 ||
+    !experienceArcCopy2 ||
+    !experienceArcCopy3
+  ) {
+    return;
+  }
+
+  experienceChapters.forEach((item) => {
+    const isActive = item === button;
+    item.classList.toggle('active', isActive);
+    item.setAttribute('aria-selected', String(isActive));
+
+    if (isActive) {
+      experienceStageKicker.textContent = item.dataset.kicker || '';
+      experienceStagePeriod.textContent = item.dataset.period || '';
+      experienceStageRole.textContent = item.dataset.role || '';
+      experienceStageCompany.textContent = item.dataset.company || '';
+      experienceStageSummary.textContent = item.dataset.summary || '';
+      experienceStageShift.textContent = item.dataset.shift || '';
+
+      experienceStageMetrics.innerHTML = '';
+      (item.dataset.metrics || '')
+        .split('|')
+        .filter(Boolean)
+        .forEach((metric) => {
+          const tag = document.createElement('span');
+          tag.textContent = metric;
+          experienceStageMetrics.appendChild(tag);
+        });
+
+      experienceStageFocus.innerHTML = '';
+      (item.dataset.focus || '')
+        .split('|')
+        .filter(Boolean)
+        .forEach((focus) => {
+          const tag = document.createElement('span');
+          tag.textContent = focus;
+          experienceStageFocus.appendChild(tag);
+        });
+
+      const arcTitles = (item.dataset.arcTitles || '').split('|').filter(Boolean);
+      const arcCopy = (item.dataset.arcCopy || '').split('|').filter(Boolean);
+
+      experienceArcTitle1.textContent = arcTitles[0] || '';
+      experienceArcTitle2.textContent = arcTitles[1] || '';
+      experienceArcTitle3.textContent = arcTitles[2] || '';
+      experienceArcCopy1.textContent = arcCopy[0] || '';
+      experienceArcCopy2.textContent = arcCopy[1] || '';
+      experienceArcCopy3.textContent = arcCopy[2] || '';
+    }
+  });
 };
 
 const openDetailModal = (card) => {
@@ -290,6 +372,16 @@ if (observedSections.length) {
   updateActiveNavLink();
 }
 
+if (experienceChapters.length) {
+  experienceChapters.forEach((button) => {
+    button.addEventListener('click', () => updateExperienceStage(button));
+  });
+
+  updateExperienceStage(
+    experienceChapters.find((button) => button.classList.contains('active')) || experienceChapters[0]
+  );
+}
+
 let showAll = false;
 const initialVisible = 6;
 const statusOrder = {
@@ -446,17 +538,6 @@ document.addEventListener('keydown', (event) => {
     setMenuState(false);
     closeDetailModal();
   }
-});
-
-Array.from(document.querySelectorAll('img')).forEach((image, index) => {
-  image.decoding = 'async';
-
-  if (index === 0) {
-    image.fetchPriority = 'high';
-    return;
-  }
-
-  image.loading = 'lazy';
 });
 
 detailModalDialog?.setAttribute('tabindex', '-1');

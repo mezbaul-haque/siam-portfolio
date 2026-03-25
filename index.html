@@ -47,7 +47,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/jpeg" href="assets/siam-profile-main.jpg" />
     <link rel="apple-touch-icon" href="assets/siam-profile-main.jpg" />
-    <link rel="preload" as="image" href="assets/siam-profile-main.jpg" />
+    <link rel="preload" as="image" href="assets/siam-profile-main.webp" />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -154,8 +154,10 @@
           </div>
           <figure class="hero-image reveal">
             <img
-              src="assets/siam-profile-main.jpg"
+              src="assets/siam-profile-main.webp"
               alt="Siam Ur Rahman professional portrait"
+              width="960"
+              height="640"
             />
             <figcaption class="hero-card">
               <p>Best Fit Roles</p>
@@ -172,7 +174,14 @@
           </div>
           <div class="about-grid">
             <div class="about-image reveal">
-              <img src="assets/siam-about.jpg" alt="Siam with CX team" />
+              <img
+                src="assets/siam-about.webp"
+                alt="Siam with CX team"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div class="about-copy reveal">
               <p>
@@ -350,82 +359,154 @@
             </p>
           </div>
 
-          <div class="timeline">
-            <article class="timeline-item reveal">
-              <div class="timeline-role">
-                <div>
-                  <h3>Customer Experience Lead</h3>
-                  <span>Chaldal Limited • Jashore, Bangladesh • 04/2024 - Present</span>
-                </div>
-                <div class="role-badges">
-                  <span>52-member team</span>
-                  <span>95% CSAT</span>
-                  <span>-10% churn</span>
-                </div>
+          <div class="experience-showcase reveal">
+            <div class="experience-rail">
+              <p class="experience-rail-label">Career Chapters</p>
+              <div class="experience-selector" role="tablist" aria-label="Experience chapters">
+                <button
+                  class="experience-chapter active"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  data-kicker="Scale and trust"
+                  data-period="2024 - Present"
+                  data-role="Customer Experience Lead"
+                  data-company="Chaldal Limited • Jashore, Bangladesh"
+                  data-summary="Leading customer experience, logistics coordination, and service recovery with a 52-member team and measurable retention gains."
+                  data-shift="Turned support from reactive issue handling into a broader CX and operations leadership function with clearer ownership, tighter feedback loops, and stronger retention outcomes."
+                  data-metrics="52-member team|95% CSAT|-10% churn"
+                  data-focus="Premium Care operations|Service recovery systems|Fraud and feedback cycles"
+                  data-arc-titles="Team scale|Customer trust|Operational ownership"
+                  data-arc-copy="Led a 52-member function across support, operations, and logistics.|Turned service recovery into measurable retention and satisfaction gains.|Expanded the role from service management into cross-functional CX leadership."
+                >
+                  <span class="experience-chapter-year">2024</span>
+                  <span class="experience-chapter-copy">
+                    <strong>Lead</strong>
+                    <span>Scale the whole CX engine</span>
+                  </span>
+                </button>
+                <button
+                  class="experience-chapter"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-kicker="Systems and retention"
+                  data-period="2023 - 2024"
+                  data-role="Customer Experience Manager"
+                  data-company="Chaldal Limited • Jashore, Bangladesh"
+                  data-summary="Built dashboards, feedback loops, and retention programs that improved productivity, resolution speed, and customer satisfaction."
+                  data-shift="This chapter was about turning intuition into systems, making service quality easier to measure, coach, and improve week after week."
+                  data-metrics="KPI dashboards|95%+ CSAT|Retention programs"
+                  data-focus="Complaint reduction tracking|Root-cause monitoring|Corporate client support"
+                  data-arc-titles="Measurement layer|Coaching rhythm|Retention logic"
+                  data-arc-copy="Introduced dashboards and feedback loops that made service performance visible every day.|Used structured review cycles to improve team consistency and response quality.|Connected complaints and churn signals to concrete action plans."
+                >
+                  <span class="experience-chapter-year">2023</span>
+                  <span class="experience-chapter-copy">
+                    <strong>Manager</strong>
+                    <span>Build the operating system</span>
+                  </span>
+                </button>
+                <button
+                  class="experience-chapter"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-kicker="QA and workflow design"
+                  data-period="2021 - 2023"
+                  data-role="Customer Service In-charge"
+                  data-company="Chaldal Limited • Jashore, Bangladesh"
+                  data-summary="Set up QA and escalation workflows that connected customer service more directly with engineering execution."
+                  data-shift="This was the bridge-building period, where customer pain points became product feedback, internal QA cycles, and more reliable workflows."
+                  data-metrics="QA team setup|Workflow redesign|Engineering support"
+                  data-focus="First-contact resolution|Tech escalation unit|Internal tool QA"
+                  data-arc-titles="Issue discovery|QA discipline|Bridge to engineering"
+                  data-arc-copy="Mapped recurring friction points to understand where service breakdowns actually started.|Built QA and escalation routines that gave customer pain a more usable structure.|Helped connect day-to-day support realities with internal product and engineering fixes."
+                >
+                  <span class="experience-chapter-year">2021</span>
+                  <span class="experience-chapter-copy">
+                    <strong>In-charge</strong>
+                    <span>Connect CX with engineering</span>
+                  </span>
+                </button>
+                <button
+                  class="experience-chapter"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-kicker="Frontline foundation"
+                  data-period="2019 - 2020"
+                  data-role="Customer Service Executive"
+                  data-company="Chaldal Limited • Jashore, Bangladesh"
+                  data-summary="Owned frontline support within SLA, escalated recurring pain points, and helped train new hires during a growth phase."
+                  data-shift="The foundation chapter focused on learning customer behavior in detail and spotting repeat failures early enough to influence team practice."
+                  data-metrics="Frontline support|SLA ownership|10+ new hires trained"
+                  data-focus="Inbound and outbound support|Escalation discipline|Team onboarding"
+                  data-arc-titles="Customer pulse|Escalation habit|Growth support"
+                  data-arc-copy="Learned customer expectations directly from high-volume frontline conversations.|Built judgment around what needed immediate escalation versus workflow correction.|Helped stabilize a growing team by training new hires during expansion."
+                >
+                  <span class="experience-chapter-year">2019</span>
+                  <span class="experience-chapter-copy">
+                    <strong>Executive</strong>
+                    <span>Learn the customer pulse</span>
+                  </span>
+                </button>
               </div>
-              <ul>
-                <li>Led a 52-member customer service team across support, operations, and logistics.</li>
-                <li>Delivered 95% CSAT, +10 NPS, and 10% churn reduction through issue-pattern analysis and journey redesign.</li>
-                <li>Built and managed the Corporate Sales & Premium Care team for stronger enterprise retention.</li>
-                <li>Implemented 15-day feedback cycles, agent training, and fraud detection protocols.</li>
-              </ul>
-            </article>
+            </div>
 
-            <article class="timeline-item reveal">
-              <div class="timeline-role">
-                <div>
-                  <h3>Customer Experience Manager</h3>
-                  <span>Chaldal Limited • Jashore, Bangladesh • 07/2023 - 03/2024</span>
-                </div>
-                <div class="role-badges">
-                  <span>Recruitment overhaul</span>
-                  <span>KPI dashboards</span>
-                  <span>Retention programs</span>
-                </div>
+            <article class="experience-stage">
+              <div class="experience-stage-top">
+                <p class="experience-stage-kicker" id="experience-stage-kicker">Scale and trust</p>
+                <p class="experience-stage-period" id="experience-stage-period">2024 - Present</p>
               </div>
-              <ul>
-                <li>Introduced KPI dashboards and structured feedback loops that increased productivity and reduced average resolution time.</li>
-                <li>Led satisfaction-improvement programs that raised CSAT to 95%+ through complaint reduction and root-cause monitoring.</li>
-                <li>Managed churn analysis, retention programs, and corporate client support with better billing and delivery accuracy.</li>
-              </ul>
-            </article>
+              <h3 id="experience-stage-role">Customer Experience Lead</h3>
+              <p class="experience-stage-company" id="experience-stage-company">
+                Chaldal Limited • Jashore, Bangladesh
+              </p>
+              <p class="experience-stage-summary" id="experience-stage-summary">
+                Leading customer experience, logistics coordination, and service recovery with
+                a 52-member team and measurable retention gains.
+              </p>
 
-            <article class="timeline-item reveal">
-              <div class="timeline-role">
-                <div>
-                  <h3>Customer Service In-charge</h3>
-                  <span>Chaldal Limited • Jashore, Bangladesh • 01/2021 - 06/2023</span>
-                </div>
-                <div class="role-badges">
-                  <span>QA team setup</span>
-                  <span>Workflow redesign</span>
-                  <span>Engineering support</span>
-                </div>
+              <div class="experience-metrics" id="experience-stage-metrics">
+                <span>52-member team</span>
+                <span>95% CSAT</span>
+                <span>-10% churn</span>
               </div>
-              <ul>
-                <li>Improved first-contact resolution and service efficiency through process redesign and friction-point analysis.</li>
-                <li>Established a Software Quality Checker Team and Tech Escalation Unit to strengthen CX-engineering collaboration.</li>
-                <li>Directed QA cycles for internal tools to align engineering output with real-world user needs.</li>
-              </ul>
-            </article>
 
-            <article class="timeline-item reveal">
-              <div class="timeline-role">
-                <div>
-                  <h3>Customer Service Executive</h3>
-                  <span>Chaldal Limited • Jashore, Bangladesh • 05/2019 - 12/2020</span>
-                </div>
-                <div class="role-badges">
-                  <span>Frontline support</span>
-                  <span>SLA ownership</span>
-                  <span>New-hire training</span>
-                </div>
+              <div class="experience-panels">
+                <section class="experience-panel">
+                  <p class="experience-panel-label">What Changed</p>
+                  <p id="experience-stage-shift">
+                    Turned support from reactive issue handling into a broader CX and operations
+                    leadership function with clearer ownership, tighter feedback loops, and
+                    stronger retention outcomes.
+                  </p>
+                </section>
+                <section class="experience-panel">
+                  <p class="experience-panel-label">Focus Areas</p>
+                  <div class="experience-focus-list" id="experience-stage-focus">
+                    <span>Premium Care operations</span>
+                    <span>Service recovery systems</span>
+                    <span>Fraud and feedback cycles</span>
+                  </div>
+                </section>
               </div>
-              <ul>
-                <li>Managed inbound and outbound customer support within SLA and helped standardize early CX workflows.</li>
-                <li>Identified and escalated recurring service gaps to reduce repeat issues across key touchpoints.</li>
-                <li>Trained 10+ new hires during a high-growth period to support rapid team expansion.</li>
-              </ul>
+            </article>
+          </div>
+
+          <div class="experience-arc reveal">
+            <article class="experience-arc-card">
+              <h3 id="experience-arc-title-1">Team scale</h3>
+              <p id="experience-arc-copy-1">Led a 52-member function across support, operations, and logistics.</p>
+            </article>
+            <article class="experience-arc-card">
+              <h3 id="experience-arc-title-2">Customer trust</h3>
+              <p id="experience-arc-copy-2">Turned service recovery into measurable retention and satisfaction gains.</p>
+            </article>
+            <article class="experience-arc-card">
+              <h3 id="experience-arc-title-3">Operational ownership</h3>
+              <p id="experience-arc-copy-3">Expanded the role from service management into cross-functional CX leadership.</p>
             </article>
           </div>
         </div>
@@ -457,8 +538,12 @@
           <div class="project-grid">
             <article class="project-card reveal" data-category="cx ops" data-status="completed">
               <img
-                src="assets/projects/chaldal-food-launch.jpg"
+                src="assets/projects/chaldal-food-launch.webp"
                 alt="Chaldal food pilot launch"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -486,8 +571,12 @@
 
             <article class="project-card reveal" data-category="cx ops" data-status="completed">
               <img
-                src="assets/projects/corporate-sales-dashboard.jpg"
+                src="assets/projects/corporate-sales-dashboard.webp"
                 alt="Corporate sales and premium care"
+                width="1600"
+                height="722"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -515,8 +604,12 @@
 
             <article class="project-card reveal" data-category="people ops" data-status="completed">
               <img
-                src="assets/projects/recruitment-metrics.jpg"
+                src="assets/projects/recruitment-metrics.webp"
                 alt="Recruitment and workforce expansion"
+                width="1152"
+                height="864"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -546,6 +639,10 @@
               <img
                 src="assets/placeholder-photo.svg"
                 alt="Dispatcher operations software launch placeholder"
+                width="800"
+                height="600"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -573,8 +670,12 @@
 
             <article class="project-card reveal" data-category="tech cx" data-status="completed">
               <img
-                src="assets/projects/techops-team-presentation.jpg"
+                src="assets/projects/techops-team-presentation.webp"
                 alt="TechOps team setup"
+                width="1600"
+                height="1200"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -604,6 +705,10 @@
               <img
                 src="assets/projects/kpi-dashboard.png"
                 alt="CS and Mapping KPI dashboard"
+                width="1130"
+                height="599"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -639,7 +744,14 @@
             </article>
 
             <article class="project-card reveal" data-category="ops" data-status="completed">
-              <img src="assets/projects/chaldal-food-launch.jpg" alt="Mapping polygons" />
+              <img
+                src="assets/projects/chaldal-food-launch.webp"
+                alt="Mapping polygons"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="project-body">
                 <div class="project-meta">
                   <span class="status completed">Completed</span>
@@ -675,8 +787,12 @@
 
             <article class="project-card reveal" data-category="tech cx" data-status="progress">
               <img
-                src="assets/projects/techops-team-presentation.jpg"
+                src="assets/projects/techops-team-presentation.webp"
                 alt="AI automation and QA for Crisp"
+                width="1600"
+                height="1200"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -703,7 +819,14 @@
             </article>
 
             <article class="project-card reveal" data-category="people" data-status="failed">
-              <img src="assets/projects/recruitment-metrics.jpg" alt="English and typing" />
+              <img
+                src="assets/projects/recruitment-metrics.webp"
+                alt="English and typing"
+                width="1152"
+                height="864"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="project-body">
                 <div class="project-meta">
                   <span class="status failed">Learning</span>
@@ -742,7 +865,14 @@
             </article>
 
             <article class="project-card reveal" data-category="tech cx" data-status="failed">
-              <img src="assets/projects/kpi-dashboard.png" alt="Magic reply response time" />
+              <img
+                src="assets/projects/kpi-dashboard.png"
+                alt="Magic reply response time"
+                width="1130"
+                height="599"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="project-body">
                 <div class="project-meta">
                   <span class="status failed">Learning</span>
@@ -783,8 +913,12 @@
 
             <article class="project-card reveal" data-category="ops" data-status="completed">
               <img
-                src="assets/projects/chaldal-food-launch.jpg"
+                src="assets/projects/chaldal-food-launch.webp"
                 alt="Physical address verification"
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -821,8 +955,12 @@
 
             <article class="project-card reveal" data-category="tech ops" data-status="completed">
               <img
-                src="assets/projects/techops-team-presentation.jpg"
+                src="assets/projects/techops-team-presentation.webp"
                 alt="TechOps team introduction"
+                width="1600"
+                height="1200"
+                loading="lazy"
+                decoding="async"
               />
               <div class="project-body">
                 <div class="project-meta">
@@ -857,7 +995,14 @@
             </article>
 
             <article class="project-card reveal" data-category="culture" data-status="community">
-              <img src="assets/May Day.jpg" alt="Father's Love May Day 2024" />
+              <img
+                src="assets/May Day.webp"
+                alt="Father's Love May Day 2024"
+                width="1365"
+                height="727"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="project-body">
                 <div class="project-meta">
                   <span class="status community">Culture</span>
@@ -956,7 +1101,14 @@
             <h3 class="subsection-title reveal">Academic Background</h3>
             <div class="edu-grid">
               <article class="edu-card reveal">
-                <img src="assets/national-university-logo.svg" alt="National University" />
+                <img
+                  src="assets/national-university-logo.svg"
+                  alt="National University"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div class="edu-copy">
                   <h3>BBA, Management</h3>
                   <p class="edu-school">Cantonment College Jashore | National University</p>
@@ -974,6 +1126,10 @@
                 <img
                   src="assets/dr-abdur-razzak-college-logo.png"
                   alt="Dr. Abdur Razzak Municiple College"
+                  width="420"
+                  height="449"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div class="edu-copy">
                   <h3>Higher Secondary Certificate, Business Studies</h3>
@@ -992,6 +1148,10 @@
                 <img
                   src="assets/jessore_zilla_school_logo.png"
                   alt="Jessore Zilla School"
+                  width="150"
+                  height="150"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div class="edu-copy">
                   <h3>Secondary School Certificate, Business Studies</h3>
@@ -1016,6 +1176,10 @@
                 <img
                   src="assets/cert-harvard-leadership.png"
                   alt="Resilient Leadership certification"
+                  width="480"
+                  height="467"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div class="cert-copy">
                   <h3>Resilient Leadership</h3>
@@ -1042,6 +1206,10 @@
                 <img
                   src="assets/cert-freecodecamp-webdesign.png"
                   alt="Responsive Web Design certification"
+                  width="920"
+                  height="376"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div class="cert-copy">
                   <h3>Legacy Responsive Web Design V8</h3>
@@ -1072,20 +1240,20 @@
             <h2>Key Achievements</h2>
             <p>Results highlighted directly in the updated CV.</p>
           </div>
-          <div class="timeline achievement-grid">
-            <div class="timeline-item reveal">
+          <div class="achievement-grid">
+            <div class="achievement-card reveal">
               <p>Customer satisfaction and retention: 95% CSAT, +10 NPS, and 10% churn reduction.</p>
             </div>
-            <div class="timeline-item reveal">
+            <div class="achievement-card reveal">
               <p>Built Premium Care operations for corporate customers handling BDT 60+ lakh in monthly orders.</p>
             </div>
-            <div class="timeline-item reveal">
+            <div class="achievement-card reveal">
               <p>Hired and onboarded 1,000+ employees and reduced hiring cycle time by 30%.</p>
             </div>
-            <div class="timeline-item reveal">
+            <div class="achievement-card reveal">
               <p>Supported dispatcher software rollout for 4,500+ weekly shipments and helped reduce dispatch errors by 25%.</p>
             </div>
-            <div class="timeline-item reveal">
+            <div class="achievement-card reveal">
               <p>Launched fraud detection protocols to reduce suspicious activity and protect revenue.</p>
             </div>
           </div>
